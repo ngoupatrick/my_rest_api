@@ -31,7 +31,7 @@ home_api = Blueprint('api', __name__)
             'description': 'test of not found'
         }
     }
-})  # , methods=['POST']
+},methods=['POST'])  # , 
 def hello():
     """
     1 liner about the route
