@@ -5,7 +5,8 @@ from api.model.WelcomeModel import WelcomeModel
 from api.model.TosModel import TosModel
 from api.model.DataModel import DataModel
 from api.model.ErrorModel import ErrorModel
-from api.schema.Welcome import DataSchema, WelcomeSchema, TosSchema, ErrorSchema
+from api.model.BDModel import Personne
+from api.schema.Welcome import DataSchema, WelcomeSchema, TosSchema, ErrorSchema, PersonneSchema, PersonnesSchema
 
 
 home_api = Blueprint('api', __name__)
@@ -31,7 +32,7 @@ home_api = Blueprint('api', __name__)
             'description': 'test of not found'
         }
     }
-},methods=['POST'])  # , 
+},methods=['POST'])
 def hello():
     """
     1 liner about the route
@@ -75,3 +76,8 @@ def getIP():
 def gestionError(error):
     result = ErrorModel(error=error)
     return ErrorSchema().dump(result), 404
+
+@home_api.route('/personne')
+def personne_list():
+    all_personne = Personne.query.all()
+    return PersonnesSchema.dumps(all_personne), 200

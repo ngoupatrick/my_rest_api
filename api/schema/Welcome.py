@@ -1,8 +1,9 @@
-from dataclasses import fields
-from email import message
 from flask_marshmallow import Schema
 from marshmallow import fields
 from marshmallow.fields import Str
+
+from api.db.db_extensions import ma_obj
+from api.model.BDModel import Personne
 
 
 class WelcomeSchema(Schema):
@@ -30,3 +31,9 @@ class ErrorSchema(Schema):
     # class Meta:
     #fields = ['code', 'description']
     #message = Str()
+
+class PersonneSchema(ma_obj.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Personne
+        
+PersonnesSchema = PersonneSchema(many=True)
