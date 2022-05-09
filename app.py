@@ -14,12 +14,15 @@ def create_app():
         'termsOfService': "/api/tos",
     }
     swagger = Swagger(app)
-    
-    app.config["SQLALCHEMY_DATABASE_URI"] = f'sqlite:////home/patrick/Bureau/python/any_prj/my_rest_api/data_test/test.sqlite3'
+    # basedir = /home/patrick/Bureau/python/any_prj/my_rest_api
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    app.config["SQLALCHEMY_DATABASE_URI"] = f'sqlite:///{basedir}/data_test/test.sqlite3'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_ECHO'] = False
+
     db_obj.init_app(app=app)
     ma_obj.init_app(app=app)
+
     app.register_blueprint(home_api, url_prefix='/api')
     return app
 
@@ -37,6 +40,7 @@ if __name__ == "__main__":
     port = args.port
 
     app = create_app()
+    # db_obj.create_all()
 
     app.run(host='0.0.0.0', port=port, debug=True, use_reloader=True)
     app.logger.error('affichage looger debug')

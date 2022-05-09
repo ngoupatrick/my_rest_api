@@ -3,7 +3,7 @@ from marshmallow import fields
 from marshmallow.fields import Str
 
 from api.db.db_extensions import ma_obj
-from api.model.BDModel import Personne
+from api.model.BDModel import Personne, User
 
 
 class WelcomeSchema(Schema):
@@ -32,8 +32,15 @@ class ErrorSchema(Schema):
     #fields = ['code', 'description']
     #message = Str()
 
+
 class PersonneSchema(ma_obj.SQLAlchemyAutoSchema):
     class Meta:
         model = Personne
-        
+
+
+class UserSchema(ma_obj.SQLAlchemyAutoSchema):
+    class Meta:
+        model = User
+
 PersonnesSchema = PersonneSchema(many=True)
+UsersSchema = UserSchema(many=True)

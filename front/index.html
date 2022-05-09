@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>submit demo</title>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+
+<body>
+    <form action="" method="post">
+
+        <div class="container">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+
+            <button type="submit">Login</button>
+
+        </div>
+
+    </form>
+    <span id="rep"></span>
+    <script>
+        $("form").submit(function(event) {
+            /*if ($("input").first().val() === "correct") {
+                $("rep").text("Validated...").show();
+                return;
+            }*/
+            var login = $("#uname").val()
+            var psw = $("#psw").val()
+
+
+            $("#rep").text(psw).show().fadeOut(1000);
+            event.preventDefault();
+        });
+    </script>
+</body>
